@@ -1,5 +1,4 @@
 *.env
-postgresql_data/
 
 .DS_Store
 .vscode
