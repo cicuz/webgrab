@@ -1,0 +1,41 @@
+version: "3.4"
+
+x-django: &django
+  restart: always
+  env_file:
+    - ../.dev.env
+  image: webgrab_main_app
+  depends_on:
+    - db
+    - rabbitmq
+
+services:
+  db:
+    image: postgres:10.6
+    volumes:
+      - ../postgresql_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  rabbitmq:
+    image: rabbitmq:3-management
+    command: rabbitmq-server
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  web:
+    <<: *django
+    build:
+      target: dev
+      context: ..
+      dockerfile: Dockerfile
+    volumes:
+      - ../src:/code
+      - ..:/repo
+    ports:
+      - "8000:8000"
+    tty: true
+  celery:
+    <<: *django
+    command: python manage.py dev_celery worker
+    volumes:
+      - ../src:/code
