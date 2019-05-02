@@ -27,8 +27,7 @@ RUN chmod +x /uwsgi-nginx-entrypoint.sh
 
 ENTRYPOINT ["/repo/docker-entrypoint.sh"]
 
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-CMD ["/bin/bash"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 FROM tiangolo/uwsgi-nginx:python3.7 as prod
 

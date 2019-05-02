@@ -33,7 +33,6 @@ services:
       - ..:/repo
     ports:
       - "8000:8000"
-    tty: true
   celery:
     <<: *django
     command: python manage.py dev_celery worker
