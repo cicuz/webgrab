@@ -8,6 +8,7 @@ x-django: &django
   depends_on:
     - db
     - rabbitmq
+    - selenium
 
 services:
   db:
@@ -22,6 +23,10 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+  selenium:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
   web:
     <<: *django
     build:

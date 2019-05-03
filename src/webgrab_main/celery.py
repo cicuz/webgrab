@@ -1,5 +1,6 @@
 import os
 from celery import Celery
+from selenium.webdriver.chrome.options import Options
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webgrab_main.settings')
@@ -19,3 +20,9 @@ app.autodiscover_tasks()
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
+    from selenium import webdriver
+    command_executor = "http://selenium:4444/wd/hub"
+    driver = webdriver.Remote(command_executor, webdriver.DesiredCapabilities.CHROME)
+    driver.get('https://google.com')
+    screenshot = driver.save_screenshot('my_screenshot.png')
+    driver.quit()
