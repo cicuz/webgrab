@@ -71,6 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webgrab_main.wsgi.application'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -123,6 +124,82 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s"
+        },
+        'celery_main': {
+            'format': "[%(asctime)s: %(levelname)s/%(processName)s] %(message)s"
+        },
+        'simple': {
+            'format': "[%(asctime)s] %(levelname)s %(message)s"
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file_debug': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/django.log',
+            'maxBytes': 1024*1024*5,  # 5 MB
+            'backupCount': 7,
+            'formatter': 'verbose',
+        },
+        'celery_debug': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'log/celery.log',
+            'maxBytes': 1024*1024*5,  # 5 MB
+            'backupCount': 7,
+            'formatter': 'celery_main',
+        },
+    },
+    'loggers': {
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['file_debug'],
+            'propagate': False,
+        },
+        'amqp': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.request': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.server': {
+            'level': 'INFO',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.db': {
+            'level': 'ERROR',
+        },
+        'celery': {
+            'level': 'DEBUG',
+            'handlers': ['celery_debug'],
+        },
+        'requests': {
+            'level': 'INFO',
+        },
+    },
+}
 
 # Celery
 CELERY_BROKER_URL = os.environ.get("RABBITMQ_URL")
