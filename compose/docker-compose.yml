@@ -14,7 +14,7 @@ services:
   db:
     image: postgres:10.6
     volumes:
-      - ../postgresql_data:/var/lib/postgresql/data
+      - ../postgresql/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
   rabbitmq:
