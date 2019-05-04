@@ -146,6 +146,14 @@ version = "0.14"
 
 [[package]]
 category = "main"
+description = "Python implementation of hashids (http://www.hashids.org).Compatible with python 2.6-3."
+name = "hashids"
+optional = false
+python-versions = "*"
+version = "1.2.0"
+
+[[package]]
+category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"
 name = "idna"
 optional = false
@@ -318,7 +326,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.3.0"
 
 [metadata]
-content-hash = "662f3a73c0d470a476a66b9f52f429f4fc7671c87362d8f37db97a4d7d5d1222"
+content-hash = "86c695e7536d458fbbae4d2b1357b23e201c9ff1271a635681361ddb265ed313"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -336,6 +344,7 @@ django = ["6fcc3cbd55b16f9a01f37de8bcbe286e0ea22e87096557f1511051780338eaea", "b
 django-model-utils = ["2c057f3bf0859aba27f04389f0cedd2d48f8c9b3848acb86fd9970794e58f477", "8cd377744aa45f9f131d652ec460c57d1aaa88d3e9b586c8e27eb709341b9084"]
 djangorestframework = ["1d22971a5fc98becdbbad9710ca2a9148dd339f6cbea4c3ddbed2cb84bab94e1", "2884763160b997073ff1e937bd820a69d23978902a3ccd0ba53a217e196239f0"]
 docutils = ["02aec4bd92ab067f6ff27a38a38a41173bf01bed8f89157768c1573f53e474a6", "51e64ef2ebfb29cae1faa133b3710143496eca21c530f3f71424d77687764274", "7a4bd47eaf6596e1295ecb11361139febe29b084a87bf005bf899f9a42edc3c6"]
+hashids = ["6539b892a426e75747a9c0ad69409e9566f9c21b79310fc3424b5b6726f28da6"]
 idna = ["c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407", "ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"]
 jmespath = ["3720a4b1bd659dd2eecad0666459b9788813e032b83e7ba58578e48254e0a0e6", "bde2aef6f44302dfb30320115b17d030798de8c4110e28d5cf6cf91a7a31074c"]
 kombu = ["389ba09e03b15b55b1a7371a441c894fd8121d174f5583bbbca032b9ea8c9edd", "7b92303af381ef02fad6899fd5f5a9a96031d781356cd8e505fa54ae5ddee181"]

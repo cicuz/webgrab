@@ -15,6 +15,7 @@ django-model-utils = "^3.1"
 selenium = "^3.141"
 requests = "^2.21"
 Pillow = "^6.0"
+hashids = "^1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"

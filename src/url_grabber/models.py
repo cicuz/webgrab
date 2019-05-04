@@ -21,4 +21,5 @@ class TaskDetails(IndexedTimeStampedModel):
     image_download_datetime = models.DateTimeField(null=True)
 
     def __str__(self):
-        return f'{self.address} started: {self.started} completed: {self.completed} status_Code: {self.status_code} error: {self.error}'
+        return f'{self.address} started: {self.started} ' \
+            f'completed: {self.completed} status_Code: {self.status_code} error: {self.error}'

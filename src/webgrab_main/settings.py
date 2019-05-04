@@ -73,6 +73,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'webgrab_main.wsgi.application'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -205,3 +206,5 @@ LOGGING = {
 # Celery
 CELERY_BROKER_URL = os.environ.get("RABBITMQ_URL")
 BROKER_URL = CELERY_BROKER_URL
+
+HASHIDS_SALT="webgrab"
