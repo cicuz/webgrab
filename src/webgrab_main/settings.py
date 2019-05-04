@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'webgrab_main'
+    'webgrab_main',
+    'url_grabber'
 ]
 
 MIDDLEWARE = [
