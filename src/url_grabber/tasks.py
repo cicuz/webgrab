@@ -5,6 +5,7 @@ from django.core.files import File
 from django.utils import timezone
 from tempfile import NamedTemporaryFile
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.chrome.options import Options
 
 from webgrab_main.celery import app
 from selenium import webdriver
@@ -62,7 +63,14 @@ def url_grab_task(self, taskdetails_pk):
 
     task_details = TaskDetails.objects.get(pk=taskdetails_pk)
     try:
-        driver = webdriver.Remote(SELENIUM_DRIVER_URL, webdriver.DesiredCapabilities.CHROME)
+        if SELENIUM_DRIVER_URL:
+            driver = webdriver.Remote(SELENIUM_DRIVER_URL, webdriver.DesiredCapabilities.CHROME)
+        else:
+            chrome_options = Options()
+            chrome_options.add_argument('--headless')
+            chrome_options.add_argument('--no-sandbox')
+            chrome_options.add_argument('--disable-dev-shm-usage')
+            driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
         driver.get(task_details.address)
         temp_file = NamedTemporaryFile(suffix='.png')
         driver.save_screenshot(temp_file.name)

@@ -11,7 +11,7 @@ else
     echo "There is no script $PRE_START_PATH"
 fi
 
-if [ "$IS_CELERY" = "on" ]; then
+if [ "$IS_CELERY" = "yes" ]; then
     exec python -m celery worker --app=webgrab_main --loglevel=info
 else
     # Start Supervisor, with Nginx and uWSGI
