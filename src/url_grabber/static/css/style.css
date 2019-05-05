@@ -1,0 +1,45 @@
+body {
+    background-color: #f0f0f0;
+}
+
+.form {
+    width: 600px;
+    display: table;
+    margin: 0 auto;
+}
+
+.form label {
+    display: block;
+}
+
+.tasks {
+    width: 900px;
+    display: table;
+    margin: 0 auto;
+}
+
+.task {
+    background-color: #fafafa;
+    width: 860px;
+    display: table;
+    margin: 12px auto;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.screenshot {
+    display: block;
+}
+
+.address, .screenshot img, .error {
+    display: table;
+    margin: 0 auto;
+}
+
+img {
+    width: 600px;
+}
+
+.error {
+    width: 600px;
+}

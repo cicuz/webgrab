@@ -1,0 +1,20 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webgrab</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+</head>
+<body>
+
+    <form class="form" action="." method="POST">{% csrf_token %}
+        <label for="id_addresses">Addresses:</label>
+        <br>
+        <textarea placeholder="Insert URLs separated by any whitespace"
+                  name="addresses" rows="10" cols="30" required="" id="id_addresses"></textarea>
+        <br>
+        <input type="submit">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webgrabbed</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+</head>
+<body>
+    <div class="tasks">
+    {% for task in tasks %}
+        <div class="task">
+            <h2><span class="address">{{ task.address }}</span></h2>
+            {% if task.image_file %}
+            <span class="screenshot">Screenshot at {{ task.image_download_datetime }}:
+                <img src="{{ task.image_file.url }}" alt="{{ task.address }} screenshot"/>
+            </span>
+            {% elif task.completed and task.status_code %}
+            <span class="status_code">HTTP HEAD returned status code {{ task.status_code }}, so the page was not processed</span>
+            {% endif %}
+            {% if task.error %}
+            <span class="error">Error: {{ task.error }}</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>

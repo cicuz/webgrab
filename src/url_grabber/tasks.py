@@ -16,7 +16,7 @@ import logging
 
 log = logging.getLogger(__name__)
 SELENIUM_DRIVER_URL = os.environ.get("SELENIUM_DRIVER_URL")
-MIN_TIMEDELTA = datetime.timedelta(minutes=20)
+MIN_TIMEDELTA = datetime.timedelta(minutes=2)
 
 
 @app.task(ignore_result=True)
@@ -38,8 +38,11 @@ def url_check_task(taskdetails_pk):
             """
             url_grab_task.apply_async([task_details.pk])
         else:
+            task_details.completed = True
+            task_details.save()
             log.debug(f'Not spawning url_grab_task for {task_details.address}: '
                       f'status code {response.status_code}')
+            return
     except requests.exceptions.RequestException as e:
         log.error(e)
         task_details.error = f'{e}'
@@ -48,7 +51,7 @@ def url_check_task(taskdetails_pk):
     log.debug(task_details)
 
 
-@app.task(bind=True, ignore_result=True, retry_kwargs={'max_retries': 5})
+@app.task(bind=True, ignore_result=True)
 def url_grab_task(self, taskdetails_pk):
     def md5(fname):
         hash_md5 = hashlib.md5()
@@ -69,7 +72,7 @@ def url_grab_task(self, taskdetails_pk):
         driver.quit()
     except WebDriverException as e:
         log.error(e)
-        raise self.retry(exc=e)
+        raise self.retry(exc=e, max_retries=5)
     task_details.completed = True
     task_details.save(update_fields=['completed', 'image_file', 'image_download_datetime'])
     log.debug(task_details)
