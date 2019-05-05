@@ -1,6 +1,7 @@
 from django.http import Http404
+from django.urls import reverse
 from rest_framework.response import Response
-from rest_framework import generics
+from rest_framework import generics, status
 
 from hashids import Hashids
 
@@ -31,10 +32,20 @@ class TaskList(generics.ListAPIView):
 
 class TaskCreate(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
-        tasks = []
-        for url in request.data.get('urls', []):
-            task_details, _ = TaskDetails.objects.get_or_create(address=url)
-            url_check_task.apply_async([task_details.pk])
-            tasks.append(task_details.pk)
-        request_code = HASHIDS.encode(*tasks)
-        return Response({'request_code': request_code})
+        try:
+            tasks = []
+            for url in request.data.get('urls'):
+                # get or create object based on its URL
+                task_details, _ = TaskDetails.objects.get_or_create(address=url)
+                # fire up task immediately
+                url_check_task.apply_async([task_details.pk])
+                # store primary keys, for encoding the whole tuple
+                tasks.append(task_details.pk)
+            # hash all the keys with a reversible function, for later retrieval
+            request_code = HASHIDS.encode(*sorted(tasks))
+            return Response({'request_code': request_code,
+                             'result_url': request.build_absolute_uri(reverse('task-list',
+                                                                              kwargs={'request_code': request_code}))
+                             })
+        except TypeError:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
