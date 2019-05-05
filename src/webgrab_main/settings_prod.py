@@ -1,5 +1,9 @@
 from .settings import *
 
+DEBUG = False
+ALLOWED_HOSTS = ['localhost']
+
+INSTALLED_APPS += ['storages']
 
 AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_KEY')
@@ -15,3 +19,4 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
