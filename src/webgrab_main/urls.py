@@ -20,4 +20,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('tasks/', include("url_grabber.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', include("url_grabber.urls_html")),
+]
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

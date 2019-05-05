@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 
     'webgrab_main',
     'url_grabber'
@@ -79,13 +80,13 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("DATABASE_NAME"),
-        "USER": os.environ.get("DATABASE_USER"),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-        "HOST": os.environ.get("DATABASE_HOST"),
-        "PORT": os.environ.get("DATABASE_PORT"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
 
@@ -132,13 +133,13 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s"
+            'format': '[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s'
         },
         'celery_main': {
-            'format': "[%(asctime)s: %(levelname)s/%(processName)s] %(message)s"
+            'format': '[%(asctime)s: %(levelname)s/%(processName)s] %(message)s'
         },
         'simple': {
-            'format': "[%(asctime)s] %(levelname)s %(message)s"
+            'format': '[%(asctime)s] %(levelname)s %(message)s'
         },
     },
     'handlers': {
@@ -204,7 +205,7 @@ LOGGING = {
 }
 
 # Celery
-CELERY_BROKER_URL = os.environ.get("RABBITMQ_URL")
+CELERY_BROKER_URL = os.environ.get('RABBITMQ_URL')
 BROKER_URL = CELERY_BROKER_URL
 
-HASHIDS_SALT="webgrab"
+HASHIDS_SALT='webgrab'

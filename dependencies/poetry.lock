@@ -130,6 +130,17 @@ Django = ">=1.8"
 
 [[package]]
 category = "main"
+description = "Support for many storage backends in Django"
+name = "django-storages"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.7.1"
+
+[package.dependencies]
+Django = ">=1.11"
+
+[[package]]
+category = "main"
 description = "Web APIs for Django, made easy."
 name = "djangorestframework"
 optional = false
@@ -326,7 +337,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.3.0"
 
 [metadata]
-content-hash = "86c695e7536d458fbbae4d2b1357b23e201c9ff1271a635681361ddb265ed313"
+content-hash = "597233056258c36643b63139c05a70531f7c69d80b6bd159a346341eb8e3b11a"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -342,6 +353,7 @@ chardet = ["84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae", "
 colorama = ["05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d", "f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"]
 django = ["6fcc3cbd55b16f9a01f37de8bcbe286e0ea22e87096557f1511051780338eaea", "bb407d0bb46395ca1241f829f5bd03f7e482f97f7d1936e26e98dacb201ed4ec"]
 django-model-utils = ["2c057f3bf0859aba27f04389f0cedd2d48f8c9b3848acb86fd9970794e58f477", "8cd377744aa45f9f131d652ec460c57d1aaa88d3e9b586c8e27eb709341b9084"]
+django-storages = ["8e35d2c7baeda5dc6f0b4f9a0fc142d25f9a1bf72b8cebfcbc5db4863abc552d", "b1a63cd5ea286ee5a9fb45de6c3c5c0ae132d58308d06f1ce9865cfcd5e470a7"]
 djangorestframework = ["1d22971a5fc98becdbbad9710ca2a9148dd339f6cbea4c3ddbed2cb84bab94e1", "2884763160b997073ff1e937bd820a69d23978902a3ccd0ba53a217e196239f0"]
 docutils = ["02aec4bd92ab067f6ff27a38a38a41173bf01bed8f89157768c1573f53e474a6", "51e64ef2ebfb29cae1faa133b3710143496eca21c530f3f71424d77687764274", "7a4bd47eaf6596e1295ecb11361139febe29b084a87bf005bf899f9a42edc3c6"]
 hashids = ["6539b892a426e75747a9c0ad69409e9566f9c21b79310fc3424b5b6726f28da6"]
