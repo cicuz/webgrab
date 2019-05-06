@@ -20,7 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('tasks/', include("url_grabber.urls")),
-    path('', include("url_grabber.urls_html")),
+    path('^', include("url_grabber.urls_html")),
 ]
 
 if settings.DEBUG:

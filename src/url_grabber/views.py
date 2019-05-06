@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import View
 from rest_framework.response import Response
-from rest_framework import generics, status
+from rest_framework import generics, status, views
 
 from hashids import Hashids
 
@@ -61,8 +61,8 @@ class TaskList(TaskHandlerMixin, generics.ListAPIView):
         return qs
 
 
-class TaskCreate(TaskHandlerMixin, generics.CreateAPIView):
-    def create(self, request, *args, **kwargs):
+class TaskCreate(TaskHandlerMixin, views.APIView):
+    def post(self, request, *args, **kwargs):
         try:
             url_list = request.data.get('urls')
             request_code = self._launch_tasks(url_list)

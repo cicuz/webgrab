@@ -33,7 +33,7 @@ As an additional example, the production build includes some updated settings an
 
 ## caveats
 
-- migrations are always run, for mere convenience: since this is going to be more of a proof-of-concept project than an ongoing one, I expect the database to rarely be present and initialized.
+- the `migrate` management command is always run, for mere convenience: since this is going to be more of a proof-of-concept project than an ongoing one, I expect the database to rarely be present and initialized.
 
 - `docker-compose.prod` doesn't check for the status of postgresql, so the `web` container is likely to crash and restart a couple of times while the db data folder gets initialized: this follows the assumption that a production environment is going to have a separate server for the database, so checking for its status would be a bit more complicated.
 
