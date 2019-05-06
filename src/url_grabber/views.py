@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
 from django.views import View
 from rest_framework.response import Response
 from rest_framework import generics, status
@@ -11,9 +12,12 @@ from webgrab_main.settings import HASHIDS_SALT
 from .models import TaskDetails
 from .serializers import TaskDetailsSerializer
 from .tasks import url_check_task
+
+import datetime
 import logging
 
 
+MAX_TIMEDELTA = datetime.timedelta(minutes=3)
 HASHIDS = Hashids(salt=HASHIDS_SALT)
 log = logging.getLogger(__name__)
 
@@ -26,9 +30,14 @@ class TaskHandlerMixin:
         tasks = []
         for url in url_list:
             # get or create object based on its URL
-            task_details, _ = TaskDetails.objects.get_or_create(address=url)
-            # fire up task immediately
-            url_check_task.apply_async([task_details.pk])
+            try:
+                recent_time = timezone.now() - MAX_TIMEDELTA
+                task_details = TaskDetails.objects.get(address=url, completed=True,
+                                                       image_download_datetime__gte=recent_time)
+            except TaskDetails.DoesNotExist:
+                task_details = TaskDetails.objects.create(address=url)
+                # fire up task immediately, if task object is not too fresh
+                url_check_task.apply_async([task_details.pk])
             # store primary keys, for encoding the whole tuple
             tasks.append(task_details.pk)
         # hash all the primary keys with a reversible function, for later retrieval

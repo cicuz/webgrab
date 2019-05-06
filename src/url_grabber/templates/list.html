@@ -16,6 +16,8 @@
             </span>
             {% elif task.completed and task.status_code %}
             <span class="status_code">HTTP HEAD returned status code {{ task.status_code }}, so the page was not processed</span>
+            {% elif not task.completed %}
+            <span class="screenshot">Screenshot not grabbed yet</span>
             {% endif %}
             {% if task.error %}
             <span class="error">Error: {{ task.error }}</span>

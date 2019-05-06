@@ -12,7 +12,7 @@ class IndexedTimeStampedModel(models.Model):
 
 
 class TaskDetails(IndexedTimeStampedModel):
-    address = models.URLField(unique=True)
+    address = models.URLField(db_index=True)
     started = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
     status_code = models.IntegerField(null=True)

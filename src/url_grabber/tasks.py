@@ -11,22 +11,16 @@ from webgrab_main.celery import app
 from selenium import webdriver
 from .models import TaskDetails
 
-import datetime
 import logging
 
 
 log = logging.getLogger(__name__)
 SELENIUM_DRIVER_URL = os.environ.get("SELENIUM_DRIVER_URL")
-MIN_TIMEDELTA = datetime.timedelta(minutes=2)
 
 
 @app.task(ignore_result=True)
 def url_check_task(taskdetails_pk):
     task_details = TaskDetails.objects.get(pk=taskdetails_pk)
-    if task_details.image_download_datetime is not None and \
-            timezone.now() - task_details.image_download_datetime <= MIN_TIMEDELTA:
-        log.debug(f'Not spawning url_grab_task for {task_details.address}')
-        return
     task_details.started = True
     try:
         response = requests.head(task_details.address)
@@ -41,8 +35,8 @@ def url_check_task(taskdetails_pk):
         else:
             task_details.completed = True
             task_details.save()
-            log.debug(f'Not spawning url_grab_task for {task_details.address}: '
-                      f'status code {response.status_code}')
+            log.debug('Not spawning url_grab_task for %s: status code %s',
+                      task_details.address, response.status_code)
             return
     except requests.exceptions.RequestException as e:
         log.error(e)
