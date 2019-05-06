@@ -17,6 +17,7 @@ requests = "^2.21"
 Pillow = "^6.0"
 hashids = "^1.2"
 django-storages = "^1.7"
+coreapi = "^2.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"

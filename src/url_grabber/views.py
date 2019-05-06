@@ -1,3 +1,4 @@
+import coreapi
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -7,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import generics, status, views
 
 from hashids import Hashids
+from rest_framework.schemas import AutoSchema
 
 from webgrab_main.settings import HASHIDS_SALT
 from .models import TaskDetails
@@ -62,6 +64,14 @@ class TaskList(TaskHandlerMixin, generics.ListAPIView):
 
 
 class TaskCreate(TaskHandlerMixin, views.APIView):
+    """
+    post:
+    Snaps a screenshot from the URLs listed in the 'urls' object
+    """
+    schema = AutoSchema(
+                manual_fields=[coreapi.Field('urls', required=True), ]
+            )
+
     def post(self, request, *args, **kwargs):
         try:
             url_list = request.data.get('urls')
