@@ -10,16 +10,15 @@
     {% for task in tasks %}
         <div class="task">
             <h2><span class="address">{{ task.address }}</span></h2>
-            {% if task.image_file %}
+            {% if not task.completed %}
+            <span class="screenshot">Screenshot not grabbed yet</span>
+            {% elif task.image_file %}
             <span class="screenshot">Screenshot at {{ task.image_download_datetime }}:
                 <img src="{{ task.image_file.url }}" alt="{{ task.address }} screenshot"/>
             </span>
-            {% elif task.completed and task.status_code %}
+            {% elif task.status_code %}
             <span class="status_code">HTTP HEAD returned status code {{ task.status_code }}, so the page was not processed</span>
-            {% elif not task.completed %}
-            <span class="screenshot">Screenshot not grabbed yet</span>
-            {% endif %}
-            {% if task.error %}
+            {% elif task.error %}
             <span class="error">Error: {{ task.error }}</span>
             {% endif %}
         </div>

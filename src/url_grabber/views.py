@@ -33,7 +33,7 @@ class TaskHandlerMixin:
             try:
                 recent_time = timezone.now() - MAX_TIMEDELTA
                 task_details = TaskDetails.objects.get(address=url, completed=True,
-                                                       image_download_datetime__gte=recent_time)
+                                                       image_download_datetime__gt=recent_time)
             except TaskDetails.DoesNotExist:
                 task_details = TaskDetails.objects.create(address=url)
                 # fire up task immediately, if task object is not too fresh
