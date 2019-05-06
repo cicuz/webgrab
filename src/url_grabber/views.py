@@ -73,7 +73,8 @@ class TaskCreate(TaskHandlerMixin, views.APIView):
                                  reverse('task-list-html', kwargs={'request_code': request_code}))
                              })
         except ValueError:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': '\'urls\' object (list of strings) missing'},
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class TaskHTMLFormView(TaskHandlerMixin, View):
