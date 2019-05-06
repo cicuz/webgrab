@@ -4,12 +4,13 @@ import time
 
 
 def postgresql_check():
+    server = os.environ["DATABASE_HOST"]
     port = int(os.environ["DATABASE_PORT"])
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     while True:
         try:
-            s.connect(("db", port))
+            s.connect((server, port))
             s.close()
             return 0
         except socket.error:

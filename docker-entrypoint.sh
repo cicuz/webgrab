@@ -11,7 +11,12 @@ if [ "$ENVIRONMENT_NAME" = "development" ]; then
     >&2 echo "Postgres is up - continuing"
 fi
 
-if [ "$IS_CELERY" != "on" ]; then
+if [ "$IS_CELERY" != "yes" ]; then
+
+    if [ "$PERFORM_MIGRATE" = "yes" ]; then
+        python manage.py migrate
+    fi
+
     /uwsgi-nginx-entrypoint.sh
 fi
 

@@ -28,6 +28,9 @@ services:
       target: prod
       context: ..
       dockerfile: Dockerfile
+    environment:
+      - IS_CELERY=no
+      - PERFORM_MIGRATE=yes
     volumes:
       - ../src:/code
       - ..:/repo

@@ -7,7 +7,7 @@ INSTALLED_APPS += ['storages']
 
 AWS_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = 'webgrab'
+AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = 's3.eu-north-1.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',

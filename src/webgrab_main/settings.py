@@ -25,6 +25,8 @@ SECRET_KEY = '#_&po+zp36lt0+(vi)zl$(t243@i@6r_#^=v3#q0+@*rp(rul1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TIME_ZONE = 'Europe/Stockholm'
+
 ALLOWED_HOSTS = []
 
 
@@ -207,4 +209,4 @@ LOGGING = {
 CELERY_BROKER_URL = os.environ.get('RABBITMQ_URL')
 BROKER_URL = CELERY_BROKER_URL
 
-HASHIDS_SALT='webgrab'
+HASHIDS_SALT = 'webgrab'
