@@ -22,6 +22,10 @@
             <span class="error">Error: {{ task.error }}</span>
             {% endif %}
         </div>
+    {% empty %}
+    <div class="task">
+        <h2><span class="address">No tasks matched</span></h2>
+    </div>
     {% endfor %}
     </div>
 </body>

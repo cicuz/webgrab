@@ -1,10 +1,10 @@
-from django.conf.urls import url
+from django.urls import path
 
 from .views import TaskHTMLListView, TaskHTMLFormView
 
 
 # HTML Url patterns
 urlpatterns = [
-    url(r'^$', TaskHTMLFormView.as_view(), name='task-create-html'),
-    url(r'^(?P<request_code>.+)/$', TaskHTMLListView.as_view(), name='task-list-html')
+    path('', TaskHTMLFormView.as_view(), name='task-create-html'),
+    path('<str:request_code>/', TaskHTMLListView.as_view(http_method_names=['get',]), name='task-list-html')
 ]

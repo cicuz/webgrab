@@ -1,10 +1,10 @@
-from django.conf.urls import url
+from django.urls import path
 
 from .views import TaskList, TaskCreate
 
 
 # API Url patterns
 urlpatterns = [
-    url(r'^$', TaskCreate.as_view(), name='task-create'),
-    url(r'^(?P<request_code>.+)/$', TaskList.as_view(), name='task-list')
+    path('', TaskCreate.as_view(), name='task-create'),
+    path('<str:request_code>/', TaskList.as_view(), name='task-list')
 ]
