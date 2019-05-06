@@ -17,6 +17,10 @@ if [ "$IS_CELERY" != "yes" ]; then
         python manage.py migrate
     fi
 
+    if [ "$ENVIRONMENT_NAME" = "production" ]; then
+        python manage.py collectstatic --noinput
+    fi
+
     /uwsgi-nginx-entrypoint.sh
 fi
 
